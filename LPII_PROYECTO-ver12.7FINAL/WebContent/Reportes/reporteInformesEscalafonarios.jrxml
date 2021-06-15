@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInformesEscalafonarios" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ef22dc16-2ea1-4232-aee0-128c57836d22">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+				     DATE_FORMAT(tbinformeescalafonario.`fecha_inf_esc`, '%d/%m/%Y') AS fecha,
+				     DATE_FORMAT(tbinformeescalafonario.`hora_inf_esc` ,'%T') AS hora,
+				     tbinformeescalafonario.`cod_inf_esc` AS codigo,
+				     tbsolicitante.`nom_sol` AS nombre,
+				     tbsolicitante.`apePat_sol` AS apePaterno,
+				     tbsolicitante.`apeMat_sol` AS apeMaterno,
+				     tbsolicitante.`dni_sol` AS dni,
+				     tbinformeescalafonario.`tp` AS tp,
+                                              tbinformeescalafonario.`ca` AS ca,
+				     tbinformeescalafonario.`tst` AS tst,
+			               tbescalamagisterial.`escala` AS escala,
+				     tbgrupoocupacional.`grupo` AS grupo,
+				     tbjornadalaboral.`jornada` AS jornada
+
+					FROM
+				     `tbescalamagisterial` tbescalamagisterial INNER JOIN `tbinformeescalafonario` tbinformeescalafonario ON tbescalamagisterial.`cod_es_mag` = tbinformeescalafonario.`cod_es_mag`
+				     INNER JOIN `tbgrupoocupacional` tbgrupoocupacional ON tbinformeescalafonario.`cod_grup_ocp` = tbgrupoocupacional.`cod_grup_ocp`
+				     INNER JOIN `tbjornadalaboral` tbjornadalaboral ON tbinformeescalafonario.`cod_jor_labo` = tbjornadalaboral.`cod_jor_labo`
+				     INNER JOIN `tbexpediente` tbexpediente ON tbinformeescalafonario.`cod_exp` = tbexpediente.`cod_exp`
+				     INNER JOIN `tbsolicitud` tbsolicitud ON tbexpediente.`cod_exp` = tbsolicitud.`cod_solic`
+				     INNER JOIN `tbsolicitante` tbsolicitante ON tbsolicitud.`cod_sol` = tbsolicitante.`cod_sol`  order by codigo asc;]]>
+	</queryString>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="hora" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apePaterno" class="java.lang.String"/>
+	<field name="apeMaterno" class="java.lang.String"/>
+	<field name="dni" class="java.lang.String"/>
+	<field name="tp" class="java.lang.String"/>
+	<field name="ca" class="java.lang.String"/>
+	<field name="tst" class="java.lang.Integer"/>
+	<field name="escala" class="java.lang.String"/>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="jornada" class="java.lang.String"/>
+	<background>
+		<band height="700" splitType="Stretch">
+			<image>
+				<reportElement x="83" y="166" width="418" height="400" uuid="3308785e-6993-468b-9315-b74d89b13811"/>
+				<imageExpression><![CDATA["C:\\Users\\lazaro cornejo\\Desktop\\JavaPrueba\\PROYECTO_LP1\\src\\img\\logo2.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#FF0000" backcolor="#FF0000" uuid="5633b218-bf96-44ab-9939-eefd96635e8c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="17" width="555" height="23" forecolor="#FFFFFF" uuid="928a275e-1dc8-4e95-92f7-56237e2030a4"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE INFORMES ESCALAFONARIOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="5" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="178" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="163" width="555" height="1" forecolor="#000000" backcolor="#000000" uuid="73f9c485-9aec-47c9-bf8a-2880f78620d9"/>
+			</line>
+			<staticText>
+				<reportElement x="301" y="11" width="100" height="20" uuid="488af585-5f64-438e-b339-d05cbb7c23d8"/>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="401" y="11" width="100" height="20" uuid="9ca2f91d-01ab-4863-a998-5cf254d4d197"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="301" y="31" width="100" height="20" uuid="3c50be15-86f8-44d5-a6c4-cd029c526f95"/>
+				<text><![CDATA[hora]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="401" y="31" width="100" height="20" uuid="d718facc-f515-4ddb-823f-cc26a003e1a9"/>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="11" width="100" height="20" uuid="24935c0c-a8db-42a9-ad84-771e75907759"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="11" width="138" height="20" uuid="27e03e02-a34a-4dc8-9179-bf76f16dcba5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="31" width="100" height="20" uuid="43df5a26-7ebd-4c82-9f74-b1e443b60f09"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="31" width="138" height="20" uuid="f1e427d9-c1bb-4d55-8ef1-31c622f75f88"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="51" width="100" height="20" uuid="ae574b6e-d99a-421b-bb70-b237f9ebdda9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="51" width="138" height="20" uuid="a22e7673-0877-4cd3-9f80-7ddc4718d7ca"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apePaterno} + " " + $F{apeMaterno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="71" width="100" height="20" uuid="2622c3fd-0fb6-4cc4-80fc-17bbf1dd3272"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dni]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="71" width="138" height="20" uuid="062a2e05-f924-4d4a-bb4b-183253da1470"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="91" width="100" height="20" uuid="f66aa1e7-dc44-493e-963d-a36e5f81ca37"/>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="91" width="138" height="20" uuid="28925633-6409-47f2-ae15-e03158a961fc"/>
+				<textFieldExpression><![CDATA[$F{tp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="131" width="100" height="20" uuid="e664facd-12ef-4f85-a26e-e685211c9760"/>
+				<text><![CDATA[Cargo Actual]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="131" width="138" height="20" uuid="ff16c010-e01a-41e1-9796-2024bdf9b744"/>
+				<textFieldExpression><![CDATA[$F{ca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="301" y="131" width="100" height="20" uuid="ed53603d-fa12-42b0-a180-7c0bb7b51de4"/>
+				<text><![CDATA[Tiempo Servicio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="401" y="131" width="100" height="20" uuid="416aa64b-1b24-465b-a715-f6529ed3988e"/>
+				<textFieldExpression><![CDATA[$F{tst}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="111" width="100" height="20" uuid="1f852362-44a3-4fab-8b9e-ce0a31580084"/>
+				<text><![CDATA[Escala Mag.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="111" width="138" height="20" uuid="e121c132-8a94-40ec-ad87-b5fb48a09085"/>
+				<textFieldExpression><![CDATA[$F{escala}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="301" y="91" width="100" height="20" uuid="1da53a3d-8af8-4256-88df-d26c49a81b26"/>
+				<text><![CDATA[Grupo Ocup.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="401" y="91" width="100" height="20" uuid="9cdf4274-792d-4a3f-840b-4b78b2ade982"/>
+				<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="301" y="111" width="100" height="20" uuid="0d2d0ac1-18e8-4b09-b929-1f601a7665d0"/>
+				<text><![CDATA[Jornada Laboral]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="401" y="111" width="100" height="20" uuid="c2a0f5d2-f853-4fdd-9d0e-fb522feaeda9"/>
+				<textFieldExpression><![CDATA[$F{jornada}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="64" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="44" width="40" height="20" uuid="e3211ba0-1fbe-4dd7-a621-f052420182bc"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="44" width="78" height="20" uuid="6088fe4c-c8c7-403f-b40c-3eb996147407"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="33" width="555" height="1" forecolor="#000000" backcolor="#000000" uuid="83c47b76-b8bd-4b02-ada4-fc8c23424f94"/>
+			</line>
+			<staticText>
+				<reportElement x="250" y="44" width="186" height="20" uuid="e0c0da5c-1679-4186-8215-7addce57b0ce"/>
+				<text><![CDATA[Universidad Nacional San Luis Gonzaga
+
+Universidad Nacional "San Luis Gonzaga"]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>
